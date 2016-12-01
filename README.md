@@ -1,6 +1,7 @@
 # TUBES_ASD_1301154183_1301154281
 
 اَللَّهُمَّ لاَ سَهْلَ إِلاَّ مَا جَعَلْتَهُ سَهْلاً وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلاً
+
 Allaahumma Laa Sahla Illaa Maa Ja’altahu Sahlaa Wa Anta Taj’alul Hazna Idza Syi’ta Sahlaa
 
  Artinya :
