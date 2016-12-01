@@ -7,6 +7,10 @@ Allaahumma Laa Sahla Illaa Maa Ja’altahu Sahlaa Wa Anta Taj’alul Hazna Idza 
  Artinya :
 “Ya Allah! Tidak ada kemudahan kecuali apa yang Engkau jadikan mudah. Sedang yang susah bisa Engkau jadikan mudah, apabila Engkau menghendakinya.” (Shahih Ibnu Hibban no. 2427; Syaikh ‘Abdul Qadir Al Arna’uth menyatakan shahih dalam Takhrij Al Adzkar hal. 106)
 
+
 رَبِّ زِدْنِي عِلْمًا
- Artinya :
+
+RABBI ZIDNII ‘ILMAA
+
+Artinya :
 “Ya Tuhanku, tambahkanlah kepadaku ilmu pengetahuan.” (QS Thaahaa : 114)
