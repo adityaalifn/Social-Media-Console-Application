@@ -26,6 +26,7 @@ void Timeline(List_parent &L,address_parent &P);
 void menuAdmin();
 void createGroup(List_parent &L, address_parent &P);
 void menuGroup(List_parent &L, address_parent &P);
+void editGroup(List_parent &L,address_parent &P);
 
 int main()
 {
@@ -184,6 +185,7 @@ void menuUser(List_parent &L,address_parent &P){
 }
 
 void Timeline(List_parent &L,address_parent &P){
+    clrscr();
     int i = 0;
     address_parent tempP = first(LP);
     //if (first(LP) != NULL){
@@ -201,6 +203,7 @@ void Timeline(List_parent &L,address_parent &P){
 }
 
 void postStatus(List_parent &L,address_parent &P){
+    clrscr();
     infotype_parent x;
     int i;
     cout<<"What are you thinking now?"<<endl;
@@ -216,6 +219,7 @@ void postStatus(List_parent &L,address_parent &P){
 }
 
 void loginAdmin(){
+    clrscr();
     string username,pass;
     cout<<"***************************************************************"<<endl;
     cout<<"*                        ADMIN NOT GOD                        *"<<endl;
@@ -237,6 +241,7 @@ void loginAdmin(){
 }
 
 void menuAdmin(){
+    clrscr();
     int pil;
     cout<<"***************************************************************"<<endl;
     cout<<"*                    M E N U    A D M I N                     *"<<endl;
@@ -255,9 +260,10 @@ void menuAdmin(){
 }
 
 void menuGroup(List_parent &L,address_parent &P){
+    clrscr();
     int pil;
     infotype_child XC;
-    address_child C;
+    //address_child C;
     cout<<"***************************************************************"<<endl;
     cout<<"*                       GROUP  MENU                           *"<<endl;
     cout<<"***************************************************************"<<endl;
@@ -271,33 +277,11 @@ void menuGroup(List_parent &L,address_parent &P){
         createGroup(LP,P);
         break;
     case 2:
-        printInfo(LC);
-        cout<<"Input Group ID: "; cin>>XC.group_id;
-        C = findElm(LC,XC);
-        if (C == NULL){
-            cout<<"Group doesn't exist!"<<endl;
-            getch();
-            menuGroup(L,P);
-        }
-        else{
-            if (info(P).NIM != info(C).group_admin){
-                cout<<"You are not admin on this group!"<<endl;
-                getch();
-                menuGroup(L,P);
-            }
-            else{
-                cout<<"------------------------------------------------------"<<endl;
-                cout<<"Group Name           : "; cin>>info(C).group_name;
-                cout<<"Group Description    : "; cin>>info(C).group_desc;
-                cout<<"Edit successful!"<<endl;
-                getch();
-                menuGroup(L,P);
-            }
-        }
+        editGroup(LP,P);
+    case 4:
+        printInfo(child(P));
         getch();
-        menuGroup(L,P);
-        //editGroup();
-        break;
+        menuUser(L,P);
     }
 }
 
@@ -324,6 +308,8 @@ void createGroup(List_parent &L, address_parent &P){
         address_child Q = first(LC);
         address_child tempC = first(LC);
         address_child C = alokasi(x);
+        address_relasi R = alokasi(C);
+        insertFirst(child(P),R);
         if (first(LC) == NULL){
             insertFirst(LC,C);
         }
@@ -350,4 +336,35 @@ void createGroup(List_parent &L, address_parent &P){
         getch();
         menuGroup(LP,P);
     }
+}
+
+void editGroup(List_parent &L,address_parent &P){
+    clrscr();
+    printInfo(child(P));
+    cout<<"Input Group ID: "; cin>>XC.group_id;
+    cout<<"-------------------------------------------"<<endl;
+    address_child C = findElm(LC,XC);
+    if (C == NULL){
+        cout<<"Group doesn't exist!"<<endl;
+        getch();
+        menuGroup(L,P);
+    }
+    else{
+        if (info(P).NIM != info(C).group_admin){
+            cout<<"You are not admin on this group!"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+        else{
+            cout<<"------------------------------------------------------"<<endl;
+            cout<<"Group Name           : "; cin>>info(C).group_name;
+            cout<<"Group Description    : "; cin>>info(C).group_desc;
+            cout<<"Edit successful!"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+    }
+    getch();
+    menuGroup(L,P);
+    //editGroup();
 }
