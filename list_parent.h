@@ -21,7 +21,7 @@ struct account{
     int NIM;
     string password;
     string account_name;
-    string account_class;
+    //string account_class;
     string post[10];
     //string chat[10];
     //string friends[10];

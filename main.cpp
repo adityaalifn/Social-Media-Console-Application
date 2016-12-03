@@ -159,6 +159,7 @@ void menuUser(List_parent &L,address_parent &P){
     cout<<"   2. Post status"<<endl;
     cout<<"   3. Group Menu"<<endl;
     cout<<"   4. Friend Menu"<<endl;
+    cout<<"   5. Edit Profile"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch (pil){
     case 1:
@@ -169,6 +170,16 @@ void menuUser(List_parent &L,address_parent &P){
         break;
     case 3:
         menuGroup(LP,P);
+        break;
+    case 5:
+        cout<<"Name: "; cin>>info(P).account_name;
+        cout<<"Password: "; cin>>info(P).password;
+        cout<<"Address: "; cin>>info(P).address;
+        cout<<"Phone Number: "; cin>>info(P).contact_no;
+        cout<<"Edit Profile successful!"<<endl;
+        getch();
+        menuUser(L,P);
+        break;
     }
 }
 
@@ -243,6 +254,8 @@ void menuAdmin(){
 
 void menuGroup(List_parent &L,address_parent &P){
     int pil;
+    infotype_child XC;
+    address_child C;
     cout<<"***************************************************************"<<endl;
     cout<<"*                       GROUP  MENU                           *"<<endl;
     cout<<"***************************************************************"<<endl;
@@ -255,6 +268,28 @@ void menuGroup(List_parent &L,address_parent &P){
         break;
     case 2:
         printInfo(LC);
+        cout<<"Input Group ID: "; cin>>XC.group_id;
+        C = findElm(LC,XC);
+        if (C == NULL){
+            cout<<"Group doesn't exist!"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+        else{
+            if (info(P).NIM != info(C).group_admin){
+                cout<<"You are not admin on this group!"<<endl;
+                getch();
+                menuGroup(L,P);
+            }
+            else{
+                cout<<"------------------------------------------------------"<<endl;
+                cout<<"Group Name           : "; cin>>info(C).group_name;
+                cout<<"Group Description    : "; cin>>info(C).group_desc;
+                cout<<"Edit successful!"<<endl;
+                getch();
+                menuGroup(L,P);
+            }
+        }
         getch();
         menuGroup(L,P);
         //editGroup();
@@ -290,7 +325,7 @@ void createGroup(List_parent &L, address_parent &P){
         }
         else{
             while (Q != last(LC)){
-                cout<<"A";
+                //cout<<"A";
                 if (first(LC) == last(LC)){
                     if (info(first(LC)).group_id > x.group_id){
                         insertLast(LC,C);
@@ -301,7 +336,7 @@ void createGroup(List_parent &L, address_parent &P){
                 }
                 else if(info(next(Q)).group_id < x.group_id){
                     tempC = next(tempC);
-                    cout<<"A";
+                    //cout<<"A";
                 }
                 Q = next(Q);
             }

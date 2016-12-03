@@ -15,7 +15,7 @@ typedef struct group infotype_child;
 struct group{
     int group_id;
     string group_name;
-    string group_admin;
+    int group_admin;
     string group_desc;
     string group_post[10];
     string group_chat[10];
