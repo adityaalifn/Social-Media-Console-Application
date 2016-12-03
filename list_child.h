@@ -41,7 +41,7 @@ void insertLast(List_child &L, address_child P);
 void insertAfter(List_child &L,address_child Prec, address_child P);
 void deleteFirst(List_child &L, address_child &P);
 void deleteLast(List_child &L, address_child &P);
-void deleteAfter(address_child Prec, address_child &P);
+void deleteAfter(List_child &L,address_child Prec,address_child &P);
 
 
 /** PERLU MODIFIKASI */

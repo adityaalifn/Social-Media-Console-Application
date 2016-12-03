@@ -242,6 +242,8 @@ void menuAdmin(){
     cout<<"*                    M E N U    A D M I N                     *"<<endl;
     cout<<"***************************************************************"<<endl;
     cout<<"   1. View User"<<endl;
+    cout<<"   2. Delete User"<<endl;
+    cout<<"--------------------------------------------------------------*"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
     case 1:
@@ -261,6 +263,8 @@ void menuGroup(List_parent &L,address_parent &P){
     cout<<"***************************************************************"<<endl;
     cout<<"   1. Create Group"<<endl;
     cout<<"   2. Edit Group"<<endl;
+    cout<<"   3. Join Group"<<endl;
+    cout<<"   4. View Group"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
     case 1:

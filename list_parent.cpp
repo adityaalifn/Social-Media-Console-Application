@@ -81,7 +81,7 @@ void deleteFirst(List_parent &L, address_parent &P)
         P = first(L);
         if(next(P) == NULL)
         {
-            first(L) == NULL;
+            first(L) = NULL;
         }
         else
         {

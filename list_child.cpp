@@ -51,6 +51,34 @@ void insertAfter(List_child &L,address_child Prec,address_child P){
     }
 }
 
+void deleteFirst(List_child &L,address_child &P){
+    if (first(L) == last(L)){
+        first(L) = NULL;
+        last(L) = NULL;
+    }
+    else{
+        P = first(L);
+        first(L) = next(P);
+        next(P) = NULL;
+        prev(first(L)) = NULL;
+    }
+}
+
+void deleteLast(List_child &L,address_child &P){
+    P = last(L);
+    last(L) = prev(last(L));
+    prev(P) = NULL;
+    next(last(L)) = NULL;
+}
+
+void deleteAfter(List_child &L,address_child Prec,address_child &P){
+    P = next(Prec);
+    next(Prec) = next(P);
+    prev(next(P)) = Prec;
+    prev(P) = NULL;
+    next(P) = NULL;
+}
+
 void printInfo(List_child L) {
     address_child P = first(L);
     while(P !=NULL) {
@@ -69,11 +97,4 @@ address_child findElm(List_child L, infotype_child x) {
         P = next(P);
     }
     return NULL;
-}
-
-void insertAfter(address_child &Prec, address_child P) {
-    prev(next(Prec)) = P;
-    next(P) = next(Prec);
-    prev(P) = Prec;
-    next(Prec) = P;
 }
