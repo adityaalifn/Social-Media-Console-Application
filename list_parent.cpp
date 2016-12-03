@@ -20,19 +20,19 @@ address_parent alokasi(infotype_parent x) {
     return P;
 }
 
-void insertFirst(List_parent &L, address_parent P) {
-    /**
-    * IS : List_parent L mungkin kosong
-    * FS : elemen yang ditunjuk P menjadi elemen pertama pada List_parent L
-    *      next dari last elemen menunjuk ke first elemen
-    */
+void insertFirst(List_parent &L, address_parent P)
+{
     address_parent Q;
-    if(first(L) == NULL) {
+    if (first(L) == NULL)
+    {
         first(L) = P;
-        next(P) = P;
-    } else {
+        next(P) = first(L);
+    }
+    else
+    {
         Q = first(L);
-        while(next(Q) != first(L)) {
+        while (next(Q) != first(L))
+        {
             Q = next(Q);
         }
         next(P) = first(L);
@@ -40,12 +40,12 @@ void insertFirst(List_parent &L, address_parent P) {
         first(L) = P;
     }
 }
-
-void insertAfter(List_parent &L,address_parent Prec,address_parent P){
+void insertAfter(List_parent &L, address_parent Prec, address_parent P)
+{
     if (first(L) == NULL){
         insertFirst(L,P);
     }
-    else if (info(first(L)).NIM == info(Prec).NIM){
+    else if (next(Prec) == first(L)){
         insertLast(L,P);
     }
     else{
@@ -53,18 +53,90 @@ void insertAfter(List_parent &L,address_parent Prec,address_parent P){
         next(Prec) = P;
     }
 }
-
-void insertLast(List_parent &L,address_parent P){
-    address_parent Q = first(L);
-    if (first(L) == NULL){
-        insertFirst(L,P);
+void insertLast(List_parent &L, address_parent P)
+{
+    address_parent Q;
+    if (first(L) == NULL)
+    {
+        first(L) = P;
+        next(P) = first(L);
     }
-    else{
-        do{
-            next(Q);
-        }while (info(Q).NIM != info(first(L)).NIM);
+    else
+    {
+        Q = first(L);
+        while (next(Q) != first(L))
+        {
+            Q = next(Q);
+        }
         next(P) = first(L);
         next(Q) = P;
+    }
+}
+
+void deleteFirst(List_parent &L, address_parent &P)
+{
+    address_parent Q;
+    if (first(L) != NULL)
+    {
+        P = first(L);
+        if(next(P) == NULL)
+        {
+            first(L) == NULL;
+        }
+        else
+        {
+            Q = first(L);
+            while (next(Q) != first(L))
+            {
+                Q=next(Q);
+            }
+            P = first(L);
+            first(L) = next(P);
+            next(P) = NULL;
+            next(Q) = first(L);
+            //dealokasi(P);
+        }
+    }
+}
+
+void deleteAfter(List_parent &L, address_parent Prec, address_parent &P)
+{
+    if (next(Prec) == first(L))
+    {
+        P = first(L);
+        first(L) = next(P);
+        next(Prec) = first(L);
+        next(P) = NULL;
+    } else
+    {
+        P = next(Prec);
+        next(Prec) = next(P);
+        next(P) = NULL;
+    }
+}
+
+void deleteLast(List_parent &L, address_parent &P)
+{
+    address_parent Q;
+
+    if (first(L) != NULL)
+    {
+        P = first(L);
+        if (next(P) == NULL)
+        {
+            first(L) = NULL;
+        } else
+        {
+            Q = first(L);
+            while (next(next(Q)) != first(L))
+            {
+                Q =next(Q);
+            }
+            P = next(Q);
+            next(Q) = first(L);
+            next(P) = NULL;
+            //dealokasi(P);
+        }
     }
 }
 

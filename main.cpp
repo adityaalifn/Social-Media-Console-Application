@@ -89,17 +89,24 @@ void registerAccount(){
         for (int i=0; i<10; i++){
             x.post[i] = " ";
         }
-        address_parent Q;
+        address_parent Q = first(LP);
+        address_parent tempP = first(LP);
         address_parent P = alokasi(x);
-        Q = first(LP);
         if (first(LP) == NULL){
             insertFirst(LP,P);
         }
         else{
-            do{
-                next(Q);
-            }while ((info(Q).NIM > x.NIM) && (info(Q).NIM != info(first(LP)).NIM));
-            insertAfter(LP,Q,P);
+            while (next(Q) != first(LP)){
+                /*if (next(Q) == first(LP)){
+                    insertLast(LP,P);
+                }*/
+                if (info(next(Q)).NIM < x.NIM){
+                    cout<<"A"<<x.NIM;
+                    tempP = next(tempP);
+                }
+                Q = next(Q);
+            }
+            insertAfter(LP,tempP,P);
         }
         cout<<"Congratulations! You've been registered"<<endl;
         getch();
