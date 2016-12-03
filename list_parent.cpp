@@ -147,7 +147,8 @@ void printInfo(List_parent L) {
     address_parent P = first(L);
     if(first(L)!=NULL) {
         do {
-            cout<<info(P).NIM<<endl;
+            cout<<"NIM (ID) : "<<info(P).NIM<<endl;
+            cout<<"Nama     : "<<info(P).account_name<<endl;
             printInfo(child(P));
             P = next(P);
         } while(info(P).NIM != info(first(L)).NIM);

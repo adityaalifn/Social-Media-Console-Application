@@ -1,6 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include <stdlib.h>
+#include <string>
 
 using namespace std;
 #include "list_child.h"
@@ -78,9 +79,7 @@ void registerAccount(){
     cout<<"***************************************************************"<<endl;
     cout<<"*                     REGISTER AN ACCOUNT                     *"<<endl;
     cout<<"***************************************************************"<<endl;
-
     cout<<"   NIM (ID)      : "; cin>>x.NIM;
-
     if (findElm(LP,x) != NULL){
         cout<<"NIM already exist."<<endl;
         getch();
@@ -88,8 +87,8 @@ void registerAccount(){
     }
     else{
         cout<<"   Password      : "; cin>>x.password;
-        /*cout<<"   Name          : "; cin>>x.account_name;
-        cout<<"   Address       : "; cin>>x.address;
+        cout<<"   Name          : "; cin>>x.account_name;
+        /*cout<<"   Address       : "; cin>>x.address;
         cout<<"   Phone Number  : "; cin>>x.contact_no;*/
         for (int i=0; i<10; i++){
             x.post[i] = " ";
@@ -172,6 +171,10 @@ void menuUser(List_parent &L,address_parent &P){
     case 3:
         menuGroup(LP,P);
         break;
+    case 4:
+        cout<<"Coming Soon! Please follow my GitHub:)\ngithub.com/adityaalifn"<<endl;
+        getch();
+        break;
     case 5:
         cout<<"Name: "; cin>>info(P).account_name;
         cout<<"Password: "; cin>>info(P).password;
@@ -186,32 +189,52 @@ void menuUser(List_parent &L,address_parent &P){
 
 void Timeline(List_parent &L,address_parent &P){
     clrscr();
+    cout<<"*****************************************************"<<endl;
+    cout<<"*                      TIMELINE                     *"<<endl;
+    cout<<"*****************************************************"<<endl;
     int i = 0;
-    address_parent tempP = first(LP);
+    address_parent Q = first(LP);
     //if (first(LP) != NULL){
-        do{
+        /*do{
             cout<<info(tempP).account_name<<endl;
             while ((i < 10) && (info(AP).post[i] != " ")){
                 cout<<info(tempP).post[i]<<endl;
                 i++;
             }
-            next(tempP);
-        }while (tempP != first(LP));
+            tempP = next(tempP);
+        }while (tempP != first(LP));*/
     //}
-    getch();
+    if(first(L)!=NULL) {
+        do {
+            if (info(Q).post[0] != " "){
+                i = 0;
+                cout<<endl<<"Name: "<<info(Q).account_name<<endl;
+                //cout<<"Status   : "<<endl;
+                //cout<<"--> "<<info(Q).post[0];
+                while ((info(Q).post[i] != " ") && (i<10)){
+                    cout<<"--> "<<info(Q).post[i]<<endl;
+                    i++;
+                }
+            }
+            Q = next(Q);
+        } while(info(Q).NIM != info(first(LP)).NIM);
+    }    getch();
     menuUser(LP,P);
 }
 
 void postStatus(List_parent &L,address_parent &P){
     clrscr();
     infotype_parent x;
-    int i;
-    cout<<"What are you thinking now?"<<endl;
-    cout<<"-> "; cin>>x.post[0];
+    int i=0;
     while ((i < 10) && (info(P).post[i] != " ")){
         i++;
     }
-    info(P).post[i] = x.post[0];
+    cout<<"********************************************"<<endl;
+    cout<<"*               POST  STATUS               *"<<endl;
+    cout<<"********************************************"<<endl;
+    cout<<"What are you thinking now?"<<endl;
+    cout<<"-> "; cin>>x.post[i];
+    info(P).post[i] = x.post[i];
     cout<<"Success! Your mind has been posted."<<endl;
     cout<<"Your mind is '"<<info(P).post[i]<<"'."<<endl;
     getch();
@@ -278,10 +301,12 @@ void menuGroup(List_parent &L,address_parent &P){
         break;
     case 2:
         editGroup(LP,P);
+        break;
     case 4:
         printInfo(child(P));
         getch();
         menuUser(L,P);
+        break;
     }
 }
 
