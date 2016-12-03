@@ -38,7 +38,7 @@ struct List_child{
 void createList(List_child &L);
 void insertFirst(List_child &L, address_child P);
 void insertLast(List_child &L, address_child P);
-void insertAfter(address_child Prec, address_child P);
+void insertAfter(List_child &L,address_child Prec, address_child P);
 void deleteFirst(List_child &L, address_child &P);
 void deleteLast(List_child &L, address_child &P);
 void deleteAfter(address_child Prec, address_child &P);

@@ -24,6 +24,33 @@ void insertFirst(List_child &L, address_child P) {
     }
 }
 
+void insertLast(List_child &L,address_child P){
+    if (first(L) == NULL){
+        last(L) = P;
+        first(L) = P;
+    }
+    else{
+        prev(P) = last(L);
+        next(last(L)) = P;
+        last(L) = P;
+    }
+}
+
+void insertAfter(List_child &L,address_child Prec,address_child P){
+    if (first(L) == NULL){
+        insertFirst(L,P);
+    }
+    else if (Prec == last(L)){
+        insertLast(L,P);
+    }
+    else{
+        next(P) = next(Prec);
+        prev(P) = Prec;
+        prev(next(Prec)) = P;
+        next(Prec) = P;
+    }
+}
+
 void printInfo(List_child L) {
     address_child P = first(L);
     while(P !=NULL) {

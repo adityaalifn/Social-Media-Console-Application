@@ -24,6 +24,8 @@ void menuUser(List_parent &L,address_parent &P);
 void postStatus(List_parent &L,address_parent &P);
 void Timeline(List_parent &L,address_parent &P);
 void menuAdmin();
+void createGroup(List_parent &L, address_parent &P);
+void menuGroup(List_parent &L, address_parent &P);
 
 int main()
 {
@@ -75,6 +77,7 @@ void registerAccount(){
     cout<<"***************************************************************"<<endl;
     cout<<"*                     REGISTER AN ACCOUNT                     *"<<endl;
     cout<<"***************************************************************"<<endl;
+
     cout<<"   NIM (ID)      : "; cin>>x.NIM;
 
     if (findElm(LP,x) != NULL){
@@ -164,6 +167,8 @@ void menuUser(List_parent &L,address_parent &P){
     case 2:
         postStatus(LP,P);
         break;
+    case 3:
+        menuGroup(LP,P);
     }
 }
 
@@ -236,9 +241,74 @@ void menuAdmin(){
     }
 }
 
-void menuGroup(){
+void menuGroup(List_parent &L,address_parent &P){
+    int pil;
     cout<<"***************************************************************"<<endl;
     cout<<"*                       GROUP  MENU                           *"<<endl;
     cout<<"***************************************************************"<<endl;
+    cout<<"   1. Create Group"<<endl;
+    cout<<"   2. Edit Group"<<endl;
+    cout<<"   Select: "; cin>>pil;
+    switch(pil){
+    case 1:
+        createGroup(LP,P);
+        break;
+    case 2:
+        printInfo(LC);
+        getch();
+        menuGroup(L,P);
+        //editGroup();
+        break;
+    }
+}
 
+void createGroup(List_parent &L, address_parent &P){
+    clrscr();
+    infotype_child x;
+    cout<<"***************************************************************"<<endl;
+    cout<<"*                     REGISTER AN GROUP                       *"<<endl;
+    cout<<"***************************************************************"<<endl;
+    cout<<"  GROUP ID         : "; cin>>x.group_id;
+    if (findElm(LC,x) != NULL){
+        cout<<"ID already exist."<<endl;
+        getch();
+        menuGroup(L,P);
+    }
+    else{
+        cout<<"   GROUP NAME        : "; cin>>x.group_name;
+        cout<<"   GROUP DESCRIPTION : "; cin>>x.group_desc;
+        cout<<info(P).NIM;
+        x.group_admin = info(P).NIM;
+        for (int i=0; i<10; i++){
+            x.group_post[i] = " ";
+        }
+        address_child Q = first(LC);
+        address_child tempC = first(LC);
+        address_child C = alokasi(x);
+        if (first(LC) == NULL){
+            insertFirst(LC,C);
+        }
+        else{
+            while (Q != last(LC)){
+                cout<<"A";
+                if (first(LC) == last(LC)){
+                    if (info(first(LC)).group_id > x.group_id){
+                        insertLast(LC,C);
+                    }
+                    else if (info(first(LC)).group_id < x.group_id){
+                        insertFirst(LC,C);
+                    }
+                }
+                else if(info(next(Q)).group_id < x.group_id){
+                    tempC = next(tempC);
+                    cout<<"A";
+                }
+                Q = next(Q);
+            }
+            insertAfter(LC,tempC,C);
+        }
+        cout<<"You've been created group."<<endl;
+        getch();
+        menuGroup(LP,P);
+    }
 }
