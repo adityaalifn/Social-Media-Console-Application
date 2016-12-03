@@ -27,7 +27,7 @@ void insertFirst(List_child &L, address_child P) {
 void printInfo(List_child L) {
     address_child P = first(L);
     while(P !=NULL) {
-        cout<<"->"<<info(P)<<endl;
+        cout<<"->"<<info(P).group_id<<endl;
         P = next(P);
     }
 }
@@ -36,7 +36,7 @@ void printInfo(List_child L) {
 address_child findElm(List_child L, infotype_child x) {
     address_child P = first(L);
     while(P != NULL) {
-        if(info(P)==x) {
+        if(info(P).group_id==x.group_id) {
             return P;
         }
         P = next(P);

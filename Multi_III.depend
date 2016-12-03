@@ -25,16 +25,16 @@
 	"list_child.h"
 	<iostream>
 
-1475609332 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_child.cpp
+1480739952 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_child.cpp
 	"list_child.h"
 
-1475609332 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_child.h
+1480739910 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_child.h
 	<iostream>
 
 1480703920 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.cpp
 	"list_parent.h"
 
-1480600322 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.h
+1480739911 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.h
 	<iostream>
 	"list_relasi.h"
 
@@ -43,10 +43,10 @@
 	"list_child.h"
 	<iostream>
 
-1475609332 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_relasi.cpp
+1480740053 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_relasi.cpp
 	"list_relasi.h"
 
-1480736765 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\main.cpp
+1480740068 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\main.cpp
 	<iostream>
 	<conio.h>
 	<stdlib.h>

@@ -1,4 +1,5 @@
 #include "list_relasi.h"
+using namespace std;
 
 void createList(List_relasi &L) {
     first(L) = NULL;
@@ -19,7 +20,7 @@ void insertFirst(List_relasi &L, address_relasi P) {
 void printInfo(List_relasi L) {
     address_relasi P = first(L);
     while(P !=NULL) {
-        cout<<"->"<<info(info(P))<<endl;
+        cout<<"->"<<info(info(P)).group_id<<endl;
         P = next(P);
     }
 }
@@ -28,7 +29,7 @@ void printInfo(List_relasi L) {
 address_relasi findElm(List_relasi L, address_child C) {
     address_relasi P = first(L);
     while(P != NULL) {
-        if(info(P)== C) {
+        if(info(P) == C) {
             return P;
         }
         P = next(P);

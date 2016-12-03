@@ -11,7 +11,16 @@ using namespace std;
 #define last(L) L.last
 #define info(P) P->info
 
-typedef string infotype_child;
+typedef struct group infotype_child;
+struct group{
+    int group_id;
+    string group_name;
+    string group_admin;
+    string group_desc;
+    string group_post[10];
+    string group_chat[10];
+    string group_chat_name[10];
+};
 typedef struct elmlist_child *address_child;
 
 struct elmlist_child{

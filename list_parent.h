@@ -23,8 +23,8 @@ struct account{
     string account_name;
     string account_class;
     string post[10];
-    string chat[10];
-    string friends[10];
+    //string chat[10];
+    //string friends[10];
     string address;
     int contact_no;
 };

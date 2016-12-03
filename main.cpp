@@ -76,6 +76,7 @@ void registerAccount(){
     cout<<"*                     REGISTER AN ACCOUNT                     *"<<endl;
     cout<<"***************************************************************"<<endl;
     cout<<"   NIM (ID)      : "; cin>>x.NIM;
+
     if (findElm(LP,x) != NULL){
         cout<<"NIM already exist."<<endl;
         getch();
@@ -101,7 +102,7 @@ void registerAccount(){
                     insertLast(LP,P);
                 }*/
                 if (info(next(Q)).NIM < x.NIM){
-                    cout<<"A"<<x.NIM;
+                    //cout<<"A"<<x.NIM;
                     tempP = next(tempP);
                 }
                 Q = next(Q);
@@ -167,18 +168,18 @@ void menuUser(List_parent &L,address_parent &P){
 }
 
 void Timeline(List_parent &L,address_parent &P){
-    int i;
-    AP = first(LP);
-    if (first(LP) != NULL){
+    int i = 0;
+    address_parent tempP = first(LP);
+    //if (first(LP) != NULL){
         do{
-            cout<<info(AP).account_name<<endl;
+            cout<<info(tempP).account_name<<endl;
             while ((i < 10) && (info(AP).post[i] != " ")){
-                cout<<info(AP).post[i]<<endl;
+                cout<<info(tempP).post[i]<<endl;
                 i++;
             }
-            next(AP);
-        } while (info(AP).NIM != info(first(L)).NIM);
-    }
+            next(tempP);
+        }while (tempP != first(LP));
+    //}
     getch();
     menuUser(LP,P);
 }
@@ -233,4 +234,11 @@ void menuAdmin(){
         menuAdmin();
         break;
     }
+}
+
+void menuGroup(){
+    cout<<"***************************************************************"<<endl;
+    cout<<"*                       GROUP  MENU                           *"<<endl;
+    cout<<"***************************************************************"<<endl;
+
 }
