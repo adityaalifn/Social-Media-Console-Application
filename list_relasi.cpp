@@ -13,8 +13,13 @@ address_relasi alokasi(address_child C) {
 }
 
 void insertFirst(List_relasi &L, address_relasi P) {
-    next(P) = first(L);
-    first(L) = P;
+    if (first(L) == NULL){
+        first(L) = P;
+    }
+    else{
+        next(P) = first(L);
+        first(L) = P;
+    }
 }
 
 void insertLast(List_relasi &L,address_relasi P){

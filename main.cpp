@@ -29,6 +29,7 @@ void createGroup(List_parent &L, address_parent &P);
 void menuGroup(List_parent &L, address_parent &P);
 void editGroup(List_parent &L,address_parent &P);
 void joinGroup(List_parent &L,address_parent &P);
+void exitGroup(List_parent &L,address_parent &P);
 
 int main()
 {
@@ -222,7 +223,8 @@ void Timeline(List_parent &L,address_parent &P){
             }
             Q = next(Q);
         } while(info(Q).NIM != info(first(LP)).NIM);
-    }    getch();
+    }
+    getch();
     menuUser(LP,P);
 }
 
@@ -255,7 +257,7 @@ void loginAdmin(){
     cout<<"   Password  : "; cin>>pass;
     if (username == "aditbaik"){
         if (pass == "defajahat"){
-            cout<<"Hello! Sok kamu mau ngapain"<<endl;
+            cout<<"   Hello! Sok kamu mau ngapain"<<endl;
             getch();
             menuAdmin();
         }
@@ -297,7 +299,8 @@ void menuGroup(List_parent &L,address_parent &P){
     cout<<"   1. Create Group"<<endl;
     cout<<"   2. Edit Group"<<endl;
     cout<<"   3. Join Group"<<endl;
-    cout<<"   4. View Group"<<endl;
+    cout<<"   4. Exit Group"<<endl;
+    cout<<"   5. View Group"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
     case 1:
@@ -310,6 +313,9 @@ void menuGroup(List_parent &L,address_parent &P){
         joinGroup(LP,P);
         break;
     case 4:
+        exitGroup(L,P);
+        break;
+    case 5:
         printInfo(child(P));
         getch();
         menuGroup(L,P);
@@ -380,7 +386,7 @@ void editGroup(List_parent &L,address_parent &P){
     else{
         printInfo(child(P));
         cout<<"Input Group ID: "; cin>>XC.group_id;
-        cout<<"<<---------------------- EDIT GROUP --------------------->>"<<endl;
+        cout<<"<<------------------------ EDIT GROUP ----------------------->>"<<endl;
         address_child C = findElm(LC,XC);
         address_relasi R = findElm(child(P),C);
         if (info(P).NIM != info(info(R)).group_admin){
@@ -404,7 +410,7 @@ void joinGroup(List_parent &L,address_parent &P){
     address_child C;
     infotype_child x;
     address_relasi R;
-    cout<<"<<------------------ AVAILABLE GROUP TO JOIN --------------------->>"<<endl;
+    cout<<"<<------------------- AVAILABLE GROUP TO JOIN --------------------->>"<<endl;
     printInfo(LC);
     if (first(LC) == NULL){
         cout<<"    NO USER HAS CREATED A GROUP"<<endl;
@@ -414,7 +420,7 @@ void joinGroup(List_parent &L,address_parent &P){
     cout<<"Input Group ID: "; cin>>x.group_id;
     C = findElm(LC,x);
     if (C == NULL){
-        cout<<"     NO GROUP AVAILABLE"<<endl;
+        cout<<"     GROUP NOT AVAILABLE"<<endl;
         getch();
         menuGroup(L,P);
     }
@@ -429,6 +435,48 @@ void joinGroup(List_parent &L,address_parent &P){
             R = alokasi(C);
             insertFirst(child(P),R);
             cout<<"   Successful Joined the Group!"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+    }
+}
+
+void exitGroup(List_parent &L,address_parent &P){
+    infotype_child x;
+    cout<<"<<------------------- LEAVE GROUP --------------------->>"<<endl;
+    printInfo(child(P));
+    if (first(child(P)) == NULL){
+        cout<<"    YOU ARE NOT IN A GROUP!"<<endl;
+        getch();
+        menuGroup(L,P);
+    }
+    else{
+        cout<<"---------------------------------------------------------"<<endl;
+        cout<<"   Select Group ID: "; cin>>x.group_id;
+        address_child C = findElm(LC,x);
+        address_relasi R = findElm(child(P),C);
+        if (R == NULL){
+            cout<<"    Group ID doesn't exist."<<endl;
+            getch();
+            menuUser(L,P);
+        }
+        else{
+            address_relasi tempR = first(child(P));
+            if ((first(child(P)) == R) && (next(R) == NULL)){
+                deleteFirst(child(P),R);
+            }
+            else if (next(R) == NULL){
+                deleteLast(child(P),R);
+            }
+            else{
+                while(tempR != NULL) {
+                    if(next(tempR) = R){
+                        deleteAfter(tempR,R);
+                    }
+                tempR = next(tempR);
+                }
+            }
+            cout<<"   Leave successful! Good bye my friend:("<<endl;
             getch();
             menuGroup(L,P);
         }
