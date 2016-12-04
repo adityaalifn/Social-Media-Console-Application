@@ -21,6 +21,7 @@ void clrscr();
 void registerAccount();
 void loginAccount();
 void loginAdmin();
+void deleteUser();
 void menuUser(List_parent &L,address_parent &P);
 void postStatus(List_parent &L,address_parent &P);
 void Timeline(List_parent &L,address_parent &P);
@@ -47,15 +48,16 @@ void clrscr(){
 void mainMenu(){
     clrscr();
     int pil;
-    cout<<"***************************************************************"<<endl;
-    cout<<"*           WELCOME TO TELKOM UNIVERSITY SOCIAL MEDIA         *"<<endl;
-    cout<<"***************************************************************"<<endl;
-    cout<<"   1. Register an account"<<endl;
-    cout<<"   2. Login"<<endl;
-    cout<<"   3. ADMIN"<<endl;
-    cout<<"---------------------------------------------------------------"<<endl;
-    cout<<"   99. Exit"<<endl;
-    cout<<"   Select: "; cin>>pil;
+    cout<<endl<<endl<<"   *******************************************************************"<<endl;
+    cout<<"   *              WELCOME TO TELKOM UNIVERSITY SOCIAL MEDIA         *"<<endl;
+    cout<<"   *******************************************************************"<<endl;
+    cout<<"    |  1. Register an account                                       |"<<endl;
+    cout<<"    |  2. Login                                                     |"<<endl;
+    cout<<"    |  3. ADMIN                                                     |"<<endl;
+    cout<<"   -------------------------------------------------------------------"<<endl;
+    cout<<"    |  99. Exit                                                     |"<<endl;
+    cout<<"   -------------------------------------------------------------------"<<endl;
+    cout<<"     Select: "; cin>>pil;
     switch (pil){
     case 1:
         registerAccount();
@@ -78,9 +80,9 @@ void mainMenu(){
 void registerAccount(){
     clrscr();
     infotype_parent x;
-    cout<<"***************************************************************"<<endl;
-    cout<<"*                     REGISTER AN ACCOUNT                     *"<<endl;
-    cout<<"***************************************************************"<<endl;
+    cout<<endl<<endl<<"   ***************************************************************"<<endl;
+    cout<<"*                        REGISTER AN ACCOUNT                     *"<<endl;
+    cout<<"   ***************************************************************"<<endl;
     cout<<"   NIM (ID)      : "; cin>>x.NIM;
     if (findElm(LP,x) != NULL){
         cout<<"NIM already exist."<<endl;
@@ -124,9 +126,9 @@ void loginAccount(){
     clrscr();
     infotype_parent x;
     address_parent P;
-    cout<<"***************************************************************"<<endl;
-    cout<<"*                  LOGIN INTO YOUR ACCOUNT                    *"<<endl;
-    cout<<"***************************************************************"<<endl;
+    cout<<endl<<endl<<"   ***************************************************************"<<endl;
+    cout<<"*                     LOGIN INTO YOUR ACCOUNT                    *"<<endl;
+    cout<<"   ***************************************************************"<<endl;
     cout<<"   NIM (ID)  : "; cin>>x.NIM;
     cout<<"   Password  : "; cin>>x.password;
     P = findElm(LP,x);
@@ -152,17 +154,18 @@ void menuUser(List_parent &L,address_parent &P){
     //int j = 0;
     infotype_parent x;
     clrscr();
-    cout<<"***************************************************************"<<endl;
-    cout<<"*   H O M E     H O M E     H O M E     H O M E     H O M E   *"<<endl;
-    cout<<"***************************************************************"<<endl;
-    cout<<"   Welcome back, "<<info(P).account_name<<" ("<<info(P).NIM<<")!"<<endl;
-    cout<<"   What will you do?"<<endl;
-    cout<<"   1. Timeline"<<endl;
-    cout<<"   2. Post status"<<endl;
-    cout<<"   3. Group Menu"<<endl;
-    cout<<"   4. Friend Menu"<<endl;
-    cout<<"   5. Edit Profile"<<endl;
-    cout<<"   Select: "; cin>>pil;
+    cout<<endl<<endl<<"   ***************************************************************"<<endl;
+    cout<<"   *   H O M E     H O M E     H O M E     H O M E     H O M E   *"<<endl;
+    cout<<"   ***************************************************************"<<endl;
+    cout<<"    |  Welcome back, "<<info(P).account_name<<" ("<<info(P).NIM<<")!"<<endl;
+    cout<<"    |  What will you do?"<<endl;
+    cout<<"    |  1. Timeline                                                  |"<<endl;
+    cout<<"    |  2. Post status                                               | "<<endl;
+    cout<<"    |  3. Group Menu                                                |"<<endl;
+    cout<<"    |  4. Friend Menu                                               |"<<endl;
+    cout<<"    |  5. Edit Profile                                              |"<<endl;
+    cout<<"   -------------------------------------------------------------------"<<endl;
+    cout<<"      Select: "; cin>>pil;
     switch (pil){
     case 1:
         Timeline(LP,P);
@@ -285,6 +288,42 @@ void menuAdmin(){
         getch();
         menuAdmin();
         break;
+    case 2:
+        deleteUser();
+        break;
+    }
+}
+
+void deleteUser(){
+    infotype_parent x;
+    cout<<endl<<"--------------------- DELETE USER ----------------------*"<<endl;
+    printInfo(LP);
+    cout<<"Input User ID: "; cin>>x.NIM;
+    address_parent tempP = first(LP);
+    if (findElm(LP,x) == NULL){
+        cout<<"User ID not exist"<<endl;
+        getch();
+        menuAdmin();
+    }
+    else{
+        address_parent P = findElm(LP,x);
+        if (P == first(LP)){
+            deleteFirst(LP,P);
+        }
+        else if (next(P) == first(LP)){
+            deleteLast(LP,P);
+        }
+        else{
+            do{
+                if (next(tempP) == P){
+                    deleteAfter(LP,tempP,P);
+                }
+                tempP = next(tempP);
+            }while (P != first(LP));
+        }
+        cout<<"User ID successfully deleted!"<<endl;
+        getch();
+        menuAdmin();
     }
 }
 
@@ -329,15 +368,15 @@ void createGroup(List_parent &L, address_parent &P){
     cout<<"***************************************************************"<<endl;
     cout<<"*                     REGISTER AN GROUP                       *"<<endl;
     cout<<"***************************************************************"<<endl;
-    cout<<"  GROUP ID         : "; cin>>x.group_id;
+    cout<<"   Group ID         : "; cin>>x.group_id;
     if (findElm(LC,x) != NULL){
-        cout<<"ID already exist."<<endl;
+        cout<<"    Group ID already exist."<<endl;
         getch();
         menuGroup(L,P);
     }
     else{
-        cout<<"   GROUP NAME        : "; cin>>x.group_name;
-        cout<<"   GROUP DESCRIPTION : "; cin>>x.group_desc;
+        cout<<"   Group Name        : "; cin>>x.group_name;
+        cout<<"   Group Description : "; cin>>x.group_desc;
         cout<<info(P).NIM;
         x.group_admin = info(P).NIM;
         for (int i=0; i<10; i++){
@@ -426,7 +465,7 @@ void joinGroup(List_parent &L,address_parent &P){
     }
     else{
         if (findElm(child(P),C) != NULL){
-            cout<<"You already joined this group"<<endl;
+            cout<<"   You already joined this group"<<endl;
             getch();
             menuGroup(L,P);
         }
@@ -462,17 +501,17 @@ void exitGroup(List_parent &L,address_parent &P){
             menuUser(L,P);
         }
         else{
-            cout<<"A";
+            //cout<<"A";
             address_child tempC;
             if (info(C).group_admin == info(P).NIM){
                 address_parent PP = first(LP);
                 address_relasi tempR;
                 do{
                     address_relasi RR = findElm(child(PP),permC);
-                    cout<<"E";
+                    //cout<<"E";
                     tempR = first(child(PP));
                     if (first(child(PP)) == RR){
-                        cout<<"F";
+                        //cout<<"F";
                         deleteFirst(child(PP),RR);
                     }
                     else if (next(RR) == NULL){
@@ -491,21 +530,22 @@ void exitGroup(List_parent &L,address_parent &P){
 
                 if (C == first(LC)){
                     deleteFirst(LC,C);
-                    cout<<"B";
+                    //cout<<"B";
                 }
                 else if (C == last(LC)){
                     deleteLast(LC,C);
-                    cout<<"C";
+                    //cout<<"C";
                 }
                 else{
                     while (tempC != last(LC)){
                         if (next(tempC) == C){
                             deleteAfter(LC,tempC,C);
-                            cout<<"D";
+                            //cout<<"D";
                         }
                     tempC = next(tempC);
                     }
                 }
+                cout<<"You're admin of this group. So, this group will be deleted"<<endl;
             }
             else{
                 address_relasi tempR = first(child(P));

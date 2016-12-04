@@ -64,9 +64,9 @@ void insertAfter(address_relasi Prec,address_relasi P){
 
 void printInfo(List_relasi L) {
     address_relasi P = first(L);
-    cout<<"<<------------------- JOINED GROUP ------------------->>"<<endl;
+    cout<<"<------- USER JOINED GROUP ------>"<<endl;
     if (first(L) == NULL){
-        cout<<"    NOT JOINED ANY GROUP"<<endl;
+        cout<<"   NOT JOINED ANY GROUP"<<endl;
     }
     else{
         while(P !=NULL) {

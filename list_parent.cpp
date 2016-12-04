@@ -75,27 +75,18 @@ void insertLast(List_parent &L, address_parent P)
 
 void deleteFirst(List_parent &L, address_parent &P)
 {
-    address_parent Q;
-    if (first(L) != NULL)
-    {
+    address_parent Q = first(L);
+    if (next(P) == first(L)){
+        first(L) = NULL;
+    }
+    else{
+        while (next(Q) != first(L)){
+            Q = next(Q);
+        }
         P = first(L);
-        if(next(P) == NULL)
-        {
-            first(L) = NULL;
-        }
-        else
-        {
-            Q = first(L);
-            while (next(Q) != first(L))
-            {
-                Q=next(Q);
-            }
-            P = first(L);
-            first(L) = next(P);
-            next(P) = NULL;
-            next(Q) = first(L);
-            //dealokasi(P);
-        }
+        first(L) = next(P);
+        next(P) = NULL;
+        next(Q) = first(L);
     }
 }
 
@@ -147,14 +138,17 @@ void printInfo(List_parent L) {
     address_parent P = first(L);
     if(first(L)!=NULL) {
         do {
-            cout<<"NIM (ID)       : "<<info(P).NIM<<endl;
-            cout<<"Name           : "<<info(P).account_name<<endl;
-            cout<<"Address        : "<<info(P).address<<endl;
-            cout<<"Phone Number   : "<<info(P).contact_no<<endl;
+            cout<<"    NIM (ID)       : "<<info(P).NIM<<endl;
+            cout<<"    Name           : "<<info(P).account_name<<endl;
+            cout<<"    Address        : "<<info(P).address<<endl;
+            cout<<"    Phone Number   : "<<info(P).contact_no<<endl;
             //cout<<"<------ JOINED GROUP ------>"<<endl;
             printInfo(child(P));
             P = next(P);
         } while(info(P).NIM != info(first(L)).NIM);
+    }
+    else{
+        cout<<"    No user registered!"<<endl;
     }
 }
 

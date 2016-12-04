@@ -5,7 +5,7 @@
 1480766512 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_child.h
 	<iostream>
 
-1480825590 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.cpp
+1480854105 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.cpp
 	"list_parent.h"
 
 1480760733 e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_parent.h
@@ -17,10 +17,10 @@
 	"list_child.h"
 	<iostream>
 
-1480849773 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_relasi.cpp
+1480854283 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\list_relasi.cpp
 	"list_relasi.h"
 
-1480849882 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\main.cpp
+1480854778 source:e:\!telkom university\struktur data\!tubes\bismillah terakhir\multi_iii\main.cpp
 	<iostream>
 	<conio.h>
 	<stdlib.h>
