@@ -16,6 +16,8 @@ address_relasi AR;
 infotype_parent XP;
 infotype_child XC;
 
+int countUser,countGroup,countPost,countJoinGroup;
+
 void mainMenu();
 void clrscr();
 void registerAccount();
@@ -31,6 +33,9 @@ void menuGroup(List_parent &L, address_parent &P);
 void editGroup(List_parent &L,address_parent &P);
 void joinGroup(List_parent &L,address_parent &P);
 void exitGroup(List_parent &L,address_parent &P);
+void sortByID(List_parent &L1);
+void sortChild (List_relasi &L,address_parent P);
+//void sortByID (List_relasi &L1);
 
 int main()
 {
@@ -100,6 +105,7 @@ void registerAccount(){
         address_parent Q = first(LP);
         address_parent tempP = first(LP);
         address_parent P = alokasi(x);
+        countUser++;
         if (first(LP) == NULL){
             insertFirst(LP,P);
         }
@@ -244,6 +250,7 @@ void postStatus(List_parent &L,address_parent &P){
     cout<<"What are you thinking now?"<<endl;
     cout<<"-> "; cin>>x.post[i];
     info(P).post[i] = x.post[i];
+    countPost++;
     cout<<"Success! Your mind has been posted."<<endl;
     cout<<"Your mind is '"<<info(P).post[i]<<"'."<<endl;
     getch();
@@ -280,16 +287,27 @@ void menuAdmin(){
     cout<<"***************************************************************"<<endl;
     cout<<"   1. View User"<<endl;
     cout<<"   2. Delete User"<<endl;
+    cout<<"   3. View Summary"<<endl;
     cout<<"--------------------------------------------------------------*"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
     case 1:
         printInfo(LP);
+        //sortByID(LP,LC);
         getch();
         menuAdmin();
         break;
     case 2:
         deleteUser();
+        break;
+    case 3:
+        cout<<"<< ------------- VIEW APPLICATION SUMMARY ------------ >>"<<endl;
+        cout<<"    Number of User Registered    : "<<countUser<<endl;
+        cout<<"    Number of Group Created      : "<<countGroup<<endl;
+        cout<<"    Number of Status Posted      : "<<countPost<<endl;
+        cout<<"    Number of Member Join Group  : "<<countJoinGroup<<endl;
+        getch();
+        menuAdmin();
         break;
     }
 }
@@ -362,6 +380,7 @@ void menuGroup(List_parent &L,address_parent &P){
         exitGroup(L,P);
         break;
     case 5:
+        //sortChild(child(P),P);
         printInfo(child(P));
         getch();
         menuGroup(L,P);
@@ -389,6 +408,7 @@ void createGroup(List_parent &L, address_parent &P){
         for (int i=0; i<10; i++){
             x.group_post[i] = " ";
         }
+        countGroup++;
         address_child Q = first(LC);
         address_child tempC = first(LC);
         address_child C = alokasi(x);
@@ -480,6 +500,7 @@ void joinGroup(List_parent &L,address_parent &P){
             cout<<"--------------------------------------------------------------------"<<endl;
             R = alokasi(C);
             insertFirst(child(P),R);
+            countJoinGroup++;
             cout<<"   Successful Joined the Group!"<<endl;
             getch();
             menuGroup(L,P);
@@ -578,3 +599,68 @@ void exitGroup(List_parent &L,address_parent &P){
     }
 }
 
+/*void sortRelasi(List_relasi &L){
+    address_relasi P = first(L);
+    address_relasi iMin,Q;
+    while (next(P) != NULL){
+        iMin = P;
+        if (next(P) != NULL){
+            Q = next(P);
+        }
+        while (Q != NULL){
+            if (info(Q).group_id < info(iMin).group_id){
+                iMin = Q;
+            }
+
+        }
+    }
+}*/
+
+/*void sortByID (List_relasi &L1,)
+{
+    address_parent P = first(L1);
+    address_parent iMin;
+    address_parent Q;
+    while (next(P) != first(L1))
+    {
+        iMin = P;
+        if (P -> next != first(L1)) {
+            Q = P -> next;
+        }
+        while (next(Q) != first(L1))
+        {
+            if ((Q -> info).NIM < (iMin -> info).NIM)
+            {
+                iMin = Q;
+            }
+            Q = next(Q);
+        }
+        if ((iMin -> info).NIM < (P -> info).NIM)
+        {
+            swap(P -> info,iMin -> info);
+            swap(child(P),child(iMin));
+        }
+        if (Q -> next != first(L1)) {
+            Q = Q -> next;
+        }
+    }
+    printInfo(LP);
+}*/
+
+/*void sortChild (List_relasi &L,address_parent P){
+    address_child Q,C;
+    C = first(L);
+    while (C != NULL){
+        Q = C;
+        while ((next(Q) != NULL) && (Q != NULL) && (info(prev(Q)).group_id > info(Q).group_id)){
+            swap(info(prev(Q)),info(Q));
+            //swap(prev(child(Q)),child(Q));
+            Q = prev(Q);
+        }
+        C = next(C);
+    }
+    C = NULL;
+    Q = NULL;
+    printInfo(child(P));
+}
+*/
