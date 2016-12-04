@@ -454,6 +454,7 @@ void exitGroup(List_parent &L,address_parent &P){
         cout<<"---------------------------------------------------------"<<endl;
         cout<<"   Select Group ID: "; cin>>x.group_id;
         address_child C = findElm(LC,x);
+        address_child permC = C;
         address_relasi R = findElm(child(P),C);
         if (R == NULL){
             cout<<"    Group ID doesn't exist."<<endl;
@@ -461,19 +462,66 @@ void exitGroup(List_parent &L,address_parent &P){
             menuUser(L,P);
         }
         else{
-            address_relasi tempR = first(child(P));
-            if ((first(child(P)) == R) && (next(R) == NULL)){
-                deleteFirst(child(P),R);
-            }
-            else if (next(R) == NULL){
-                deleteLast(child(P),R);
+            cout<<"A";
+            address_child tempC;
+            if (info(C).group_admin == info(P).NIM){
+                address_parent PP = first(LP);
+                address_relasi tempR;
+                do{
+                    address_relasi RR = findElm(child(PP),permC);
+                    cout<<"E";
+                    tempR = first(child(PP));
+                    if (first(child(PP)) == RR){
+                        cout<<"F";
+                        deleteFirst(child(PP),RR);
+                    }
+                    else if (next(RR) == NULL){
+                        deleteLast(child(PP),RR);
+                    }
+                    else{
+                        while (tempR != NULL){
+                            if (next(tempR) == RR){
+                                deleteAfter(child(PP),tempR,RR);
+                            }
+                        tempR = next(tempR);
+                        }
+                    }
+                PP = next(PP);
+                }while (PP != first(LP));
+
+                if (C == first(LC)){
+                    deleteFirst(LC,C);
+                    cout<<"B";
+                }
+                else if (C == last(LC)){
+                    deleteLast(LC,C);
+                    cout<<"C";
+                }
+                else{
+                    while (tempC != last(LC)){
+                        if (next(tempC) == C){
+                            deleteAfter(LC,tempC,C);
+                            cout<<"D";
+                        }
+                    tempC = next(tempC);
+                    }
+                }
             }
             else{
-                while(tempR != NULL) {
-                    if(next(tempR) = R){
-                        deleteAfter(tempR,R);
+                address_relasi tempR = first(child(P));
+                if (first(child(P)) == R){
+                    deleteFirst(child(P),R);
+                }
+                else if (next(R) == NULL){
+                    deleteLast(child(P),R);
+                }
+                else{
+                    while(tempR != NULL) {
+                        if(next(tempR) == R){
+                            deleteAfter(child(P),tempR,R);
+                        }
+                    tempR = next(tempR);
                     }
-                tempR = next(tempR);
                 }
             }
             cout<<"   Leave successful! Good bye my friend:("<<endl;
@@ -482,3 +530,4 @@ void exitGroup(List_parent &L,address_parent &P){
         }
     }
 }
+

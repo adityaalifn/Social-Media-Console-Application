@@ -15,6 +15,7 @@ address_relasi alokasi(address_child C) {
 void insertFirst(List_relasi &L, address_relasi P) {
     if (first(L) == NULL){
         first(L) = P;
+        next(P) = NULL;
     }
     else{
         next(P) = first(L);
@@ -31,9 +32,14 @@ void insertLast(List_relasi &L,address_relasi P){
 }
 
 void deleteFirst(List_relasi &L,address_relasi &P){
-    P = first(L);
-    first(L) = next(P);
-    next(P) = NULL;
+    if (next(first(L)) == NULL){
+        first(L) = NULL;
+    }
+    else{
+        P = first(L);
+        first(L) = next(P);
+        next(P) = NULL;
+    }
 }
 
 void deleteLast(List_relasi &L,address_relasi &P){
@@ -45,7 +51,7 @@ void deleteLast(List_relasi &L,address_relasi &P){
     next(Q) = NULL;
 }
 
-void deleteAfter(address_relasi Prec,address_relasi &P){
+void deleteAfter(List_relasi &L,address_relasi Prec,address_relasi &P){
     P = next(Prec);
     next(Prec) = next(P);
     next(P) = NULL;
