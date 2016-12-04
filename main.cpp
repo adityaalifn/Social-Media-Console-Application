@@ -297,33 +297,40 @@ void menuAdmin(){
 void deleteUser(){
     infotype_parent x;
     cout<<endl<<"--------------------- DELETE USER ----------------------*"<<endl;
-    printInfo(LP);
-    cout<<"Input User ID: "; cin>>x.NIM;
-    address_parent tempP = first(LP);
-    if (findElm(LP,x) == NULL){
-        cout<<"User ID not exist"<<endl;
+    if (first(LP) == NULL){
+        cout<<"   No user registered!"<<endl;
         getch();
         menuAdmin();
     }
     else{
-        address_parent P = findElm(LP,x);
-        if (P == first(LP)){
-            deleteFirst(LP,P);
-        }
-        else if (next(P) == first(LP)){
-            deleteLast(LP,P);
+        printInfo(LP);
+        cout<<"Input User ID: "; cin>>x.NIM;
+        address_parent tempP = first(LP);
+        if (findElm(LP,x) == NULL){
+            cout<<"User ID not exist"<<endl;
+            getch();
+            menuAdmin();
         }
         else{
-            do{
-                if (next(tempP) == P){
-                    deleteAfter(LP,tempP,P);
-                }
-                tempP = next(tempP);
-            }while (P != first(LP));
+            address_parent P = findElm(LP,x);
+            if (P == first(LP)){
+                deleteFirst(LP,P);
+            }
+            else if (next(P) == first(LP)){
+                deleteLast(LP,P);
+            }
+            else{
+                do{
+                    if (next(tempP) == P){
+                        deleteAfter(LP,tempP,P);
+                    }
+                    tempP = next(tempP);
+                }while (P != first(LP));
+            }
+            cout<<"User ID successfully deleted!"<<endl;
+            getch();
+            menuAdmin();
         }
-        cout<<"User ID successfully deleted!"<<endl;
-        getch();
-        menuAdmin();
     }
 }
 
