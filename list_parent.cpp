@@ -147,8 +147,11 @@ void printInfo(List_parent L) {
     address_parent P = first(L);
     if(first(L)!=NULL) {
         do {
-            cout<<"NIM (ID) : "<<info(P).NIM<<endl;
-            cout<<"Nama     : "<<info(P).account_name<<endl;
+            cout<<"NIM (ID)       : "<<info(P).NIM<<endl;
+            cout<<"Name           : "<<info(P).account_name<<endl;
+            cout<<"Address        : "<<info(P).address<<endl;
+            cout<<"Phone Number   : "<<info(P).contact_no<<endl;
+            //cout<<"<------ JOINED GROUP ------>"<<endl;
             printInfo(child(P));
             P = next(P);
         } while(info(P).NIM != info(first(L)).NIM);

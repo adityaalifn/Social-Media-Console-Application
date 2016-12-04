@@ -28,6 +28,7 @@ void menuAdmin();
 void createGroup(List_parent &L, address_parent &P);
 void menuGroup(List_parent &L, address_parent &P);
 void editGroup(List_parent &L,address_parent &P);
+void joinGroup(List_parent &L,address_parent &P);
 
 int main()
 {
@@ -88,8 +89,8 @@ void registerAccount(){
     else{
         cout<<"   Password      : "; cin>>x.password;
         cout<<"   Name          : "; cin>>x.account_name;
-        /*cout<<"   Address       : "; cin>>x.address;
-        cout<<"   Phone Number  : "; cin>>x.contact_no;*/
+        cout<<"   Address       : "; cin>>x.address;
+        cout<<"   Phone Number  : "; cin>>x.contact_no;
         for (int i=0; i<10; i++){
             x.post[i] = " ";
         }
@@ -172,15 +173,18 @@ void menuUser(List_parent &L,address_parent &P){
         menuGroup(LP,P);
         break;
     case 4:
-        cout<<"Coming Soon! Please follow my GitHub:)\ngithub.com/adityaalifn"<<endl;
+        cout<<"    Coming Soon! Please follow my GitHub:)\n    github.com/adityaalifn"<<endl;
         getch();
+        menuUser(L,P);
         break;
     case 5:
-        cout<<"Name: "; cin>>info(P).account_name;
-        cout<<"Password: "; cin>>info(P).password;
-        cout<<"Address: "; cin>>info(P).address;
-        cout<<"Phone Number: "; cin>>info(P).contact_no;
-        cout<<"Edit Profile successful!"<<endl;
+        cout<<"<<----------------- EDIT YOUR PROFILE ---------------->>"<<endl;
+        cout<<"   Name: "; cin>>info(P).account_name;
+        cout<<"   Password: "; cin>>info(P).password;
+        cout<<"   Address: "; cin>>info(P).address;
+        cout<<"   Phone Number: "; cin>>info(P).contact_no;
+        cout<<"--------------------------------------------------------"<<endl;
+        cout<<"   Edit Profile successful!"<<endl;
         getch();
         menuUser(L,P);
         break;
@@ -302,10 +306,13 @@ void menuGroup(List_parent &L,address_parent &P){
     case 2:
         editGroup(LP,P);
         break;
+    case 3:
+        joinGroup(LP,P);
+        break;
     case 4:
         printInfo(child(P));
         getch();
-        menuUser(L,P);
+        menuGroup(L,P);
         break;
     }
 }
@@ -365,31 +372,65 @@ void createGroup(List_parent &L, address_parent &P){
 
 void editGroup(List_parent &L,address_parent &P){
     clrscr();
-    printInfo(child(P));
-    cout<<"Input Group ID: "; cin>>XC.group_id;
-    cout<<"-------------------------------------------"<<endl;
-    address_child C = findElm(LC,XC);
-    if (C == NULL){
+    if (first(child(P)) == NULL){
         cout<<"Group doesn't exist!"<<endl;
         getch();
         menuGroup(L,P);
     }
     else{
-        if (info(P).NIM != info(C).group_admin){
-            cout<<"You are not admin on this group!"<<endl;
+        printInfo(child(P));
+        cout<<"Input Group ID: "; cin>>XC.group_id;
+        cout<<"<<---------------------- EDIT GROUP --------------------->>"<<endl;
+        address_child C = findElm(LC,XC);
+        address_relasi R = findElm(child(P),C);
+        if (info(P).NIM != info(info(R)).group_admin){
+            cout<<"    You are not admin on this group!"<<endl;
             getch();
             menuGroup(L,P);
         }
         else{
-            cout<<"------------------------------------------------------"<<endl;
-            cout<<"Group Name           : "; cin>>info(C).group_name;
-            cout<<"Group Description    : "; cin>>info(C).group_desc;
-            cout<<"Edit successful!"<<endl;
+            cout<<"    Group Name           : "; cin>>info(C).group_name;
+            cout<<"    Group Description    : "; cin>>info(C).group_desc;
+            cout<<"    Edit successful!"<<endl;
             getch();
             menuGroup(L,P);
         }
     }
     getch();
     menuGroup(L,P);
-    //editGroup();
+}
+
+void joinGroup(List_parent &L,address_parent &P){
+    address_child C;
+    infotype_child x;
+    address_relasi R;
+    cout<<"<<------------------ AVAILABLE GROUP TO JOIN --------------------->>"<<endl;
+    printInfo(LC);
+    if (first(LC) == NULL){
+        cout<<"    NO USER HAS CREATED A GROUP"<<endl;
+        getch();
+        menuUser(L,P);
+    }
+    cout<<"Input Group ID: "; cin>>x.group_id;
+    C = findElm(LC,x);
+    if (C == NULL){
+        cout<<"     NO GROUP AVAILABLE"<<endl;
+        getch();
+        menuGroup(L,P);
+    }
+    else{
+        if (findElm(child(P),C) != NULL){
+            cout<<"You already joined this group"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+        else{
+            cout<<"--------------------------------------------------------------------"<<endl;
+            R = alokasi(C);
+            insertFirst(child(P),R);
+            cout<<"   Successful Joined the Group!"<<endl;
+            getch();
+            menuGroup(L,P);
+        }
+    }
 }

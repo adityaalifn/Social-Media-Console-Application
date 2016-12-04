@@ -82,7 +82,8 @@ void deleteAfter(List_child &L,address_child Prec,address_child &P){
 void printInfo(List_child L) {
     address_child P = first(L);
     while(P !=NULL) {
-        cout<<"->"<<info(P).group_id<<endl;
+        cout<<"    Group ID     : "<<info(P).group_id<<endl;
+        cout<<"    Group Name   : "<<info(P).group_name<<endl<<endl;
         P = next(P);
     }
 }

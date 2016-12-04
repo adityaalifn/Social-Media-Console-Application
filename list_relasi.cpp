@@ -53,9 +53,17 @@ void insertAfter(address_relasi Prec,address_relasi P){
 
 void printInfo(List_relasi L) {
     address_relasi P = first(L);
-    while(P !=NULL) {
-        cout<<"->"<<info(info(P)).group_id<<endl;
-        P = next(P);
+    cout<<"<<------------------- JOINED GROUP ------------------->>"<<endl;
+    if (first(L) == NULL){
+        cout<<"    NOT JOINED ANY GROUP"<<endl;
+    }
+    else{
+        while(P !=NULL) {
+            cout<<"    Group ID             : "<<info(info(P)).group_id<<endl;
+            cout<<"    Group Name           : "<<info(info(P)).group_name<<endl;
+            cout<<"    Group Description    : "<<info(info(P)).group_desc<<endl<<endl;
+            P = next(P);
+        }
     }
 }
 
@@ -69,4 +77,3 @@ address_relasi findElm(List_relasi L, address_child C) {
     }
     return NULL;
 }
-
