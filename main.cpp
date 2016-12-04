@@ -164,12 +164,13 @@ void menuUser(List_parent &L,address_parent &P){
     cout<<"   *   H O M E     H O M E     H O M E     H O M E     H O M E   *"<<endl;
     cout<<"   ***************************************************************"<<endl;
     cout<<"    |  Welcome back, "<<info(P).account_name<<" ("<<info(P).NIM<<")!"<<endl;
-    cout<<"    |  What will you do?"<<endl;
+    cout<<"    |  What will you do?                                            |"<<endl;
     cout<<"    |  1. Timeline                                                  |"<<endl;
     cout<<"    |  2. Post status                                               | "<<endl;
     cout<<"    |  3. Group Menu                                                |"<<endl;
     cout<<"    |  4. Friend Menu                                               |"<<endl;
     cout<<"    |  5. Edit Profile                                              |"<<endl;
+    cout<<"    |  9. Logout                                                    |"<<endl;
     cout<<"   -------------------------------------------------------------------"<<endl;
     cout<<"      Select: "; cin>>pil;
     switch (pil){
@@ -197,6 +198,9 @@ void menuUser(List_parent &L,address_parent &P){
         cout<<"   Edit Profile successful!"<<endl;
         getch();
         menuUser(L,P);
+        break;
+    case 9:
+        mainMenu();
         break;
     }
 }
@@ -288,6 +292,7 @@ void menuAdmin(){
     cout<<"   1. View User"<<endl;
     cout<<"   2. Delete User"<<endl;
     cout<<"   3. View Summary"<<endl;
+    cout<<"   9. Logout"<<endl;
     cout<<"--------------------------------------------------------------*"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
@@ -308,6 +313,9 @@ void menuAdmin(){
         cout<<"    Number of Member Join Group  : "<<countJoinGroup<<endl;
         getch();
         menuAdmin();
+        break;
+    case 9:
+        mainMenu();
         break;
     }
 }
@@ -365,6 +373,7 @@ void menuGroup(List_parent &L,address_parent &P){
     cout<<"   3. Join Group"<<endl;
     cout<<"   4. Exit Group"<<endl;
     cout<<"   5. View Group"<<endl;
+    cout<<"   9. Back"<<endl;
     cout<<"   Select: "; cin>>pil;
     switch(pil){
     case 1:
@@ -384,6 +393,9 @@ void menuGroup(List_parent &L,address_parent &P){
         printInfo(child(P));
         getch();
         menuGroup(L,P);
+        break;
+    case 9:
+        menuUser(L,P);
         break;
     }
 }
